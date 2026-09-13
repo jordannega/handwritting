@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Docx to Handwriting Converter</title>
+    <style>
+        body { font-family: system-ui, sans-serif; max-width: 800px; margin: 40px auto; padding: 20px; line-height: 1.6; }
+        .card { border: 1px solid #ddd; padding: 24px; border-radius: 8px; background: #fafafa; }
+        .form-group { margin-bottom: 20px; }
+        label { font-weight: bold; display: block; margin-bottom: 6px; }
+        input[type="file"] { display: block; }
+        button { background: #0066cc; color: white; border: none; padding: 10px 20px; border-radius: 4px; cursor: pointer; font-size: 16px; }
+        button:hover { background: #0052a3; }
+        .result-container { margin-top: 30px; text-align: center; }
+        img { max-width: 100%; border: 1px solid #ccc; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+    </style>
+</head>
+<body>
+
+    <h1>Docx to Handwriting Web App</h1>
+    <div class="card">
+        <form method="POST" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="docx_file">1. Upload Word Document (.docx)</label>
+                <input type="file" name="docx_file" id="docx_file" accept=".docx" required>
+            </div>
+
+            <div class="form-group">
+                <label for="sample_files">2. Upload Handwriting Samples (Select multiple images)</label>
+                <input type="file" name="sample_files" id="sample_files" accept="image/*" multiple required>
+            </div>
+
+            <button type="submit">Convert to Handwriting</button>
+        </form>
+    </div>
+
+    {% if result_image %}
+    <div class="result-container">
+        <h2>Rendered Output</h2>
+        <a href="/uploads/{{ result_image }}" download="handwritten.png">
+            <button style="margin-bottom: 15px; background: #28a745;">Download Image</button>
+        </a>
+        <div>
+            <img src="/uploads/{{ result_image }}" alt="Handwritten Output">
+        </div>
+    </div>
+    {% endif %}
+
+</body>
+</html>
